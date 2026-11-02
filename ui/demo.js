@@ -70,8 +70,8 @@ var DEMO_PRODUCTS = [
     { id: 17, category_id: 4, slug: "pulse", name: "VequIR Pulse Generator", code: "PULSE", price: 59, stock: 15,
       blurb: "Square, sine, triangle — and anything you can draw.",
       specs: [["Channels", "2"], ["Bandwidth", "10 MHz sine"], ["Sample rate", "125 MS/s"], ["Amplitude", "±10 V"], ["Waveforms", "4 + arbitrary"], ["Interface", "USB‑C, rotary"]] },
-    /* From the neoBotics parts library (battery_holders/…): the still
-       and the meshes are exported by make/neobotics.py. Meshes are
+    /* From vequir-power's parts library (battery_holders/…), built with
+       neoBotics: the still and the meshes are exported by make/neobotics.py. Meshes are
        [name, colour] — the file is ui/models/<slug>/<name>.stl. */
     { id: 18, category_id: 2, slug: "holder-18650", name: "18650 Holder, Single", code: "18650 ×1", price: 1.9, stock: 85,
       image: "img/products/holder-18650.webp",
@@ -83,7 +83,7 @@ var DEMO_PRODUCTS = [
       blurb: "Six single holders, three wide and two deep, locked together by an end strip at each end.",
       specs: [["Cells", "6 × 18650, 3 × 2"], ["Size", "80.4 × 63 × 40 mm"], ["Contacts", "12 × Keystone 1107‑1 clips"], ["Joining", "2 end strips, 24 × M1.2 × 6 screws"], ["Mounting", "2 tabs per strip, M1.2"], ["Included", "Holders, clips, strips, screws — no cells"]],
       meshes: [["holders", "#38383d"], ["cells", "#e08f3d"], ["clips", "#ccccd1"], ["strips", "#4c5461"], ["screws", "#b3b3b8"]] },
-    /* neoBotics product PB6 (products/PB6), a powerbank: the six-cell
+    /* vequir-unit's product PB6 (products/PB6), a powerbank: the six-cell
        pack and its USB boards in the enclosure, under the lid — hide the
        lid layer to look inside. */
     { id: 20, category_id: 4, slug: "pb6", name: "VequIR PB6 Powerbank", code: "PB6", price: 49, stock: 9,

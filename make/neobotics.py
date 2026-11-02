@@ -3,11 +3,12 @@
     python make/neobotics.py <neoBotics build dir> <product slug> <layer>=<#colour> ...
 
 The build dir is an assembled model's `cad/` folder, as `neobotics build
-library/<category>/<item>` leaves it (results/library/.../_assembly/cad).
+library/<category>/<item>` leaves it in a vequir catalogue repository
+(../vequir-power/results/library/.../_assembly/cad).
 Its component STLs are merged into one binary STL per layer, a layer being
 every mesh drawn in that colour, and written to ui/models/<slug>/<layer>.stl;
 its part.png has its axis triad blanked and is cropped, scaled and written to ui/img/products/<slug>.webp.
-Needs Pillow (it is in the neoBotics environment). The rows that point at
+Needs Pillow (it is in the neobotics environment). The rows that point at
 these files (products.image, meshes) live in ui/demo.js.
 """
 import json

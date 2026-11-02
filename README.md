@@ -48,11 +48,19 @@ ui/
 make/      tpl.mk (compose macro)  js.map  web.map  neobotics.py
 ```
 
-## 3D parts from neoBotics
+## 3D parts from the vequir catalogues
 
-Parts designed in [neoBotics](https://github.com/anroleroux/neoBotics) — the
-single 18650 holder and the six-cell pack from its parts library, and the
-PB6 powerbank from its products (`neobotics build PB6`) — carry a
+Parts designed with [neoBotics](https://github.com/anroleroux/neoBotics)
+live in three catalogue repositories, each with its own product page:
+
+| Repository | Holds | Page |
+|---|---|---|
+| [vequir-standard](https://github.com/anroleroux/vequir-standard) | standard parts: the 18650 cell, the Keystone 1107-1 clip, the M1.2 screw | [anroleroux.co.za/vequir-standard](https://anroleroux.co.za/vequir-standard/) |
+| [vequir-power](https://github.com/anroleroux/vequir-power) | the single 18650 holder and the six-cell pack, and their parts | [anroleroux.co.za/vequir-power](https://anroleroux.co.za/vequir-power/) |
+| [vequir-unit](https://github.com/anroleroux/vequir-unit) | the PB6 powerbank | [anroleroux.co.za/vequir-unit](https://anroleroux.co.za/vequir-unit/) |
+
+The single 18650 holder and the six-cell pack (vequir-power) and the PB6
+powerbank (vequir-unit, `neobotics build PB6`) carry a
 rendered still for their tile and an interactive model on their page
 (`comps/viewer.js`: drag to turn, scroll to zoom, hide or see through each
 layer). The viewer loads three.js 0.160.0 from jsDelivr (pinned in
@@ -64,8 +72,9 @@ merges the component STLs into one per colour (a layer) and turns
 `part.png` into the still.
 
 ```bash
-# in neoBotics: neobotics build library/battery_holders/pack_3x2
-python make/neobotics.py ../neoBotics/results/library/battery_holders/pack_3x2/_assembly/cad \
+# in vequir-power (with neoBotics and vequir-standard cloned beside it):
+#   neobotics build library/battery_holders/pack_3x2
+python make/neobotics.py ../vequir-power/results/library/battery_holders/pack_3x2/_assembly/cad \
     pack-18650-6 holders=#38383d cells=#e08f3d clips=#ccccd1 strips=#4c5461 screws=#b3b3b8
 ```
 
