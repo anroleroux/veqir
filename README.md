@@ -65,12 +65,12 @@ The 18650 cell, the Keystone 1107-1 clip and the M1.2 × 6 screws
 carry a
 rendered still for their tile and an interactive model on their page
 (`comps/viewer.js`: drag to turn, scroll to zoom, hide or see through each
-layer). The page opens on the still with a **View in 3D** button, so
+layer). The page opens on the still with an **Enable 3D** button, so
 nothing extra is downloaded unless the shopper asks: only then does the
 viewer load three.js 0.160.0 from jsDelivr (pinned in `layout.html`'s
 import map) and the meshes. The choice is remembered in this browser
 (localStorage `viewer_3d` = `"1"`), so later models open in 3D straight
-away until **still image** under the viewer turns it off. If three.js or a
+away until **disable 3D** under the viewer turns it off. If three.js or a
 mesh fails, the still stays in its place.
 
 `make/neobotics.py` brings an assembly or a single part over from a

@@ -10,9 +10,9 @@
 
    three.js comes from the CDN (pinned in layout.html's import map) and
    is only fetched when the shopper asks for it: the figure opens on the
-   still with a "View in 3D" button. Choosing 3D is remembered (the
+   still with an "Enable 3D" button. Choosing 3D is remembered (the
    `viewer_3d` key, this browser only), so later models open in 3D
-   straight away until "Still image" turns it off again. The `viewer`
+   straight away until "disable 3D" turns it off again. The `viewer`
    mount is the bar under the canvas: that button, or one chip per
    layer, to hide it or see through it. */
 
@@ -37,14 +37,14 @@ viewerFigure.innerHTML = '<img class="viewer__still" alt="">' +
 function viewerTemplate(state) {
     if (state.status === "idle") {
         return '<div class="viewer__ask">' +
-                   '<button type="button" class="btn btn--small" onclick="viewer3dOn()">View in 3D</button>' +
+                   '<button type="button" class="btn btn--small" onclick="viewer3dOn()">Enable 3D</button>' +
                    '<span class="viewer__note">Turn and look inside the model — loads the 3D viewer</span>' +
                '</div>';
     }
     if (state.status === "loading") return '<span class="viewer__note">Loading 3D model…</span>';
     if (state.status === "failed") {
         return '<span class="viewer__note">3D view unavailable · ' +
-                   '<button type="button" class="link-btn" onclick="viewer3dOff()">still image</button></span>';
+                   '<button type="button" class="link-btn" onclick="viewer3dOff()">disable 3D</button></span>';
     }
     if (state.status !== "live") return "";
     var chips = state.layers.map(function (l, i) {
@@ -60,7 +60,7 @@ function viewerTemplate(state) {
     return '<div class="layers">' + chips + '</div>' +
            '<span class="viewer__note">Drag to turn · scroll to zoom · ' +
                '<button type="button" class="link-btn" onclick="viewerReset()">reset</button> · ' +
-               '<button type="button" class="link-btn" onclick="viewer3dOff()">still image</button></span>';
+               '<button type="button" class="link-btn" onclick="viewer3dOff()">disable 3D</button></span>';
 }
 
 var viewer = mount(
@@ -215,8 +215,8 @@ function viewerReset() {
     v.controls.update();
 }
 
-/* "View in 3D": load and show this part's model, and open later ones in
-   3D too. "Still image": back to the still, and stay there. */
+/* "Enable 3D": load and show this part's model, and open later ones in
+   3D too. "Disable 3D": back to the still, and stay there. */
 function viewer3dOn() {
     viewerRemember3d(true);
     viewerShow(viewer.product, true);
