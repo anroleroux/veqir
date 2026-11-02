@@ -9,11 +9,25 @@
    three.js or a mesh cannot load.
 
    three.js comes from the CDN (pinned in layout.html's import map) and
-   is only fetched the first time a model is shown. The `viewer` mount
-   is the bar under the canvas: one chip per layer, to hide it or see
-   through it. */
+   is only fetched when the shopper asks for it: the figure opens on the
+   still with an "Enable 3D" button. Choosing 3D is remembered (the
+   `viewer_3d` key, this browser only), so later models open in 3D
+   straight away until "disable 3D" turns it off again. The `viewer`
+   mount is the bar under the canvas: that button, or one chip per
+   layer, to hide it or see through it. */
 
 var VIEWER_SEE_THROUGH = 0.2;          // a see-through layer's opacity
+var VIEWER_PREF = "viewer_3d";         // localStorage: "1" opens models in 3D
+
+function viewerPrefers3d() {
+    try { return localStorage.getItem(VIEWER_PREF) === "1"; } catch (e) { return false; }
+}
+
+function viewerRemember3d(on) {
+    try {
+        if (on) localStorage.setItem(VIEWER_PREF, "1"); else localStorage.removeItem(VIEWER_PREF);
+    } catch (e) { /* storage blocked: the choice lasts this visit only */ }
+}
 
 var viewerFigure = document.createElement("figure");
 viewerFigure.className = "viewer";
@@ -21,8 +35,17 @@ viewerFigure.innerHTML = '<img class="viewer__still" alt="">' +
     '<div class="viewer__stage"></div><div class="viewer__bar"></div>';
 
 function viewerTemplate(state) {
+    if (state.status === "idle") {
+        return '<div class="viewer__ask">' +
+                   '<button type="button" class="btn btn--small" onclick="viewer3dOn()">Enable 3D</button>' +
+                   '<span class="viewer__note">Turn and look inside the model — loads the 3D viewer</span>' +
+               '</div>';
+    }
     if (state.status === "loading") return '<span class="viewer__note">Loading 3D model…</span>';
-    if (state.status === "failed") return '<span class="viewer__note">3D view unavailable</span>';
+    if (state.status === "failed") {
+        return '<span class="viewer__note">3D view unavailable · ' +
+                   '<button type="button" class="link-btn" onclick="viewer3dOff()">disable 3D</button></span>';
+    }
     if (state.status !== "live") return "";
     var chips = state.layers.map(function (l, i) {
         return '<span class="layer' + (l.on ? '' : ' layer--off') + '">' +
@@ -36,7 +59,8 @@ function viewerTemplate(state) {
     }).join("");
     return '<div class="layers">' + chips + '</div>' +
            '<span class="viewer__note">Drag to turn · scroll to zoom · ' +
-               '<button type="button" class="link-btn" onclick="viewerReset()">reset</button></span>';
+               '<button type="button" class="link-btn" onclick="viewerReset()">reset</button> · ' +
+               '<button type="button" class="link-btn" onclick="viewer3dOff()">disable 3D</button></span>';
 }
 
 var viewer = mount(
@@ -108,18 +132,27 @@ function viewerLoadModel(id) {
     return viewerModels[id];
 }
 
-/* Show part `id` in the figure (already in its tile). */
-function viewerShow(id) {
+/* Show part `id` in the figure (already in its tile): its still, and
+   the model too when the shopper prefers 3D or `in3d` asks for it. */
+function viewerShow(id, in3d) {
     var p = productById(id);
     var still = viewerFigure.querySelector(".viewer__still");
+    in3d = in3d || viewerPrefers3d();
     // a re-render of the same part (a quantity step) keeps what is there
-    if (viewer.product === id && viewer.status !== "failed") return viewerStart();
+    if (viewer.product === id && viewer.status !== "failed" && !(in3d && viewer.status === "idle")) {
+        return viewer.status === "idle" ? undefined : viewerStart();
+    }
     viewer.product = id;
     viewer.layers = [];
-    viewer.status = "loading";
     viewerFigure.classList.remove("is-live");
     if (p.image) still.src = p.image; else still.removeAttribute("src");
     still.alt = p.name;
+    if (!in3d) {                        // the still, and the button
+        viewerStop();
+        viewer.status = "idle";
+        return;
+    }
+    viewer.status = "loading";
 
     viewerLoadThree().then(function () { return viewerLoadModel(id); }).then(function (model) {
         if (viewer.product !== id) return;              // moved on while loading
@@ -182,6 +215,21 @@ function viewerReset() {
     v.controls.update();
 }
 
+/* "Enable 3D": load and show this part's model, and open later ones in
+   3D too. "Disable 3D": back to the still, and stay there. */
+function viewer3dOn() {
+    viewerRemember3d(true);
+    viewerShow(viewer.product, true);
+}
+
+function viewer3dOff() {
+    viewerRemember3d(false);
+    viewerStop();
+    viewerFigure.classList.remove("is-live");
+    viewer.layers = [];
+    viewer.status = "idle";
+}
+
 function viewerToggle(i) {
     var part = viewer3d.model.parts[i];
     part.mesh.visible = part.edges.visible = !part.mesh.visible;
@@ -204,5 +252,5 @@ new MutationObserver(function () {
     var slot = document.querySelector("#product [data-viewer]");
     if (!slot) return viewerStop();
     slot.appendChild(viewerFigure);
-    viewerShow(Number(slot.getAttribute("data-viewer")));
+    viewerShow(Number(slot.getAttribute("data-viewer")), false);
 }).observe(document.getElementById("product"), { childList: true });

@@ -332,6 +332,8 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .viewer__bar { display: flex; flex-direction: column; gap: 8px; padding: 10px 12px 12px; border-top: 1px solid var(--rule); }
 .viewer__bar:empty { display: none; }
 .viewer__note { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.viewer__ask { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 12px; }
+.btn--small { height: 36px; padding: 0 16px; font-size: 14px; }
 .layers { display: flex; flex-wrap: wrap; gap: 6px; }
 .layer { display: inline-flex; align-items: stretch; border: 1px solid var(--muted-3); background: var(--paper); font-family: var(--mono); font-size: 11px; }
 .layer button { border: 0; background: none; cursor: pointer; padding: 4px 7px; }
@@ -365,6 +367,9 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .spec { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 16px; padding: 11px 0; border-top: 1px solid var(--rule); }
 .spec__k { font-family: var(--mono); font-size: 12px; color: var(--muted); padding-top: 2px; }
 .spec__v { font-size: 15px; font-weight: 550; }
+.design-link { color: var(--blue); text-decoration: none; overflow-wrap: anywhere; }
+.design-link:hover { text-decoration: underline; }
+.design-link__more { font-weight: 400; color: var(--muted); }
 
 /* ---- Checkout ---- */
 
