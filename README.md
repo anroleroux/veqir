@@ -78,7 +78,8 @@ python make/neobotics.py ../vequir-power/results/library/battery_holders/pack_3x
     pack-18650-6 holders=#38383d cells=#e08f3d clips=#ccccd1 strips=#4c5461 screws=#b3b3b8
 ```
 
-Then add or update the product and its `meshes` rows in `ui/demo.js`.
+Then add or update the product, its `meshes` rows and its `design` link
+(the item's page on its catalogue's site) in `ui/demo.js`.
 
 ## Routes
 
@@ -119,6 +120,7 @@ One localStorage key per model, each a JSON array of rows. Relations are ids.
 | `stock` | integer | units on hand; ≤ 5 shows "Only n left", 0 is out of stock |
 | `blurb` | text | one-line description |
 | `image` | text \| null | still for the tile, relative to the base (`img/products/<slug>.webp`); null draws the part code instead |
+| `design` | text \| null | absolute URL of the part's page in its vequir design catalogue (e.g. `https://anroleroux.co.za/vequir-power/library/battery_holders/pack_3x2/index.html`): its 3D model, STEP, STL and script. Shown as a "Design" row under the specs, labelled with the catalogue's name (the URL's first path segment); null shows none |
 | `position` | integer | "Featured" sort order |
 
 ### `specs` (catalogue)

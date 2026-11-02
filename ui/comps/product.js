@@ -19,6 +19,14 @@ function productTemplate(state) {
                    '<span class="spec__v">' + esc(s.value) + '</span></div>';
     }).join("");
 
+    // the part's page in its vequir design catalogue (vequir-power, vequir-unit, …)
+    var design = p.design
+        ? '<div class="spec spec--design"><span class="spec__k">Design</span>' +
+              '<a class="spec__v design-link" href="' + esc(p.design) + '" target="_blank" rel="noopener">' +
+                  esc(designSource(p.design)) + ' <span class="design-link__more">— 3D model, STEP, STL ↗</span></a>' +
+          '</div>'
+        : "";
+
     return '<section class="view view--product">' +
                '<a class="back-link" ' + linkAttrs(categoryPath(cat && cat.slug), "openList(" + (cat ? "'" + esc(cat.slug) + "'" : "null") + ")") + '>' +
                    '← ' + esc(cat ? cat.name : "All parts") + '</a>' +
@@ -49,11 +57,18 @@ function productTemplate(state) {
                            buy +
                        '</div>' +
                        '<div class="specs">' +
-                           '<h2 class="label">Specs</h2>' + specs +
+                           '<h2 class="label">Specs</h2>' + specs + design +
                        '</div>' +
                    '</div>' +
                '</div>' +
            '</section>';
+}
+
+// "vequir-power" from https://anroleroux.co.za/vequir-power/library/…: the
+// catalogue a design link points into (its first path segment), else its host
+function designSource(url) {
+    var m = /^https?:\/\/([^\/]+)\/([^\/]+)/.exec(url);
+    return m ? m[2] : url;
 }
 
 var product = mount(

@@ -13,7 +13,7 @@
    models documented in the README.
    ============================================================ */
 
-var DEMO_VERSION = 6;
+var DEMO_VERSION = 7;
 
 /* Specs are their own model (one row per label/value, ordered by
    `position`); they are written inline here only to keep the seed
@@ -71,23 +71,27 @@ var DEMO_PRODUCTS = [
       blurb: "Square, sine, triangle — and anything you can draw.",
       specs: [["Channels", "2"], ["Bandwidth", "10 MHz sine"], ["Sample rate", "125 MS/s"], ["Amplitude", "±10 V"], ["Waveforms", "4 + arbitrary"], ["Interface", "USB‑C, rotary"]] },
     /* From vequir-power's parts library (battery_holders/…), built with
-       neoBotics: the still and the meshes are exported by make/neobotics.py. Meshes are
-       [name, colour] — the file is ui/models/<slug>/<name>.stl. */
+       neoBotics: the still and the meshes are exported by make/neobotics.py,
+       and `design` links the item's page on vequir-power's catalogue site.
+       Meshes are [name, colour] — the file is ui/models/<slug>/<name>.stl. */
     { id: 18, category_id: 2, slug: "holder-18650", name: "18650 Holder, Single", code: "18650 ×1", price: 1.9, stock: 85,
       image: "img/products/holder-18650.webp",
+      design: "https://anroleroux.co.za/vequir-power/library/battery_holders/single_18650_holder/index.html",
       blurb: "One cell, two Keystone clips, solder lugs out the ends. Bolts to its neighbours.",
       specs: [["Cells", "1 × 18650"], ["Size", "76 × 21 × 20 mm"], ["Contacts", "Keystone 1107‑1 clips"], ["Terminals", "Solder lug, each end"], ["Joining", "M1.2 tap holes in both end faces"], ["Included", "Holder, 2 clips — no cell"]],
       meshes: [["holder", "#38383d"], ["cell", "#e08f3d"], ["clips", "#ccccd1"]] },
     { id: 19, category_id: 2, slug: "pack-18650-6", name: "18650 Six-Pack Holder", code: "18650 ×6", price: 13.5, stock: 24,
       image: "img/products/pack-18650-6.webp",
+      design: "https://anroleroux.co.za/vequir-power/library/battery_holders/pack_3x2/index.html",
       blurb: "Six single holders, three wide and two deep, locked together by an end strip at each end.",
       specs: [["Cells", "6 × 18650, 3 × 2"], ["Size", "80.4 × 63 × 40 mm"], ["Contacts", "12 × Keystone 1107‑1 clips"], ["Joining", "2 end strips, 24 × M1.2 × 6 screws"], ["Mounting", "2 tabs per strip, M1.2"], ["Included", "Holders, clips, strips, screws — no cells"]],
       meshes: [["holders", "#38383d"], ["cells", "#e08f3d"], ["clips", "#ccccd1"], ["strips", "#4c5461"], ["screws", "#b3b3b8"]] },
     /* vequir-unit's product PB6 (products/PB6), a powerbank: the six-cell
        pack and its USB boards in the enclosure, under the lid — hide the
-       lid layer to look inside. */
+       lid layer to look inside. `design` links its vequir-unit page. */
     { id: 20, category_id: 4, slug: "pb6", name: "VequIR PB6 Powerbank", code: "PB6", price: 49, stock: 9,
       image: "img/products/pb6.webp",
+      design: "https://anroleroux.co.za/vequir-unit/products/PB6/index.html",
       blurb: "Six 18650 cells in one enclosure. Charge it over USB‑C; charge your phone and anything else from its two USB‑A ports.",
       specs: [["Battery", "6 × 18650 pack, 2S3P, 8.4 V full"], ["Size", "140 × 69 × 53 mm"], ["Charging", "CN3302 2S boost charger, USB‑C in"], ["USB out", "2 × USB‑A fast charge (IP6505)"], ["Cell mounting", "Pack screwed to 4 pillars, 8 × M1.2"], ["Cells", "Not included"]],
       meshes: [["lid", "#66ad73"], ["base", "#5c8fc7"], ["holders", "#38383d"], ["cells", "#e08f3d"], ["clips", "#ccccd1"], ["strips", "#4c5461"], ["screws", "#b3b3b8"], ["chargers", "#26734c"]] }
@@ -108,7 +112,8 @@ function seedDemo() {
     if (stale || !localStorage.getItem("products")) {
         saveLocal("products", DEMO_PRODUCTS.map(function (p) {
             return { id: p.id, category_id: p.category_id, slug: p.slug, name: p.name, code: p.code,
-                     price: p.price, stock: p.stock, blurb: p.blurb, image: p.image || null, position: p.id };
+                     price: p.price, stock: p.stock, blurb: p.blurb, image: p.image || null,
+                     design: p.design || null, position: p.id };
         }));
     }
 
