@@ -13,7 +13,7 @@
    models documented in the README.
    ============================================================ */
 
-var DEMO_VERSION = 8;
+var DEMO_VERSION = 9;
 
 /* Specs are their own model (one row per label/value, ordered by
    `position`); they are written inline here only to keep the seed
@@ -114,7 +114,12 @@ var DEMO_PRODUCTS = [
       design: "https://anroleroux.co.za/vequir-standard/library/fasteners/m1_2x6_countersunk/index.html",
       blurb: "Slotted flat‑head screws that join 18650 holders into packs and fix packs down.",
       specs: [["Standard", "DIN 963, slotted countersunk"], ["Thread", "M1.2 × 0.25"], ["Length", "6 mm overall"], ["Head", "2.3 mm, 90°"], ["Tap hole", "0.95 mm"], ["Pack", "50 screws"]],
-      meshes: [["screw", "#b3b3b8"]] }
+      meshes: [["screw", "#b3b3b8"]] },
+    /* Bought in from DIY Electronics: no design in the vequir
+       catalogues yet, so no still, meshes or `design` link. */
+    { id: 24, category_id: 2, slug: "bms-3s-20a", name: "3S Li‑ion BMS 20A", code: "3S BMS", price: 4.9, stock: 30,
+      blurb: "Protection board for a three-cell 18650 or 26650 pack. Charge at 12.6 V, draw up to 20 A.",
+      specs: [["Cells", "3S, 3.6 – 3.7 V nominal"], ["Output", "20 A, 252 W max"], ["Charge voltage", "12.6 V"], ["Charge max", "12.75 V — do not exceed"], ["Fits", "18650 / 26650 Li‑ion, LiPo"], ["Size", "64 × 20 × 3.4 mm"]] }
 ];
 
 function seedDemo() {
