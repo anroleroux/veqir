@@ -1,8 +1,8 @@
-"""Pull a neoBotics assembly or part into the shop: its still image and its meshes.
+"""Pull a CAD-tool assembly or part into the shop: its still image and its meshes.
 
-    python make/neobotics.py <neoBotics build dir> <product slug> <layer>=<#colour> ...
+    python make/cad.py <cad build dir> <product slug> <layer>=<#colour> ...
 
-The build dir is an assembled model's `cad/` folder, as `neobotics build
+The build dir is an assembled model's `cad/` folder, as `cad build
 library/<category>/<item>` leaves it in a vequir catalogue repository
 (../vequir-power/results/library/.../_assembly/cad).
 Its component STLs are merged into one binary STL per layer, a layer being
@@ -10,8 +10,8 @@ every mesh drawn in that colour, and written to ui/models/<slug>/<layer>.stl;
 its part.png has its axis triad blanked and is cropped, scaled and written to ui/img/products/<slug>.webp.
 A single part's build dir (`results/library/<category>/<part>/cad`) takes
 one layer: its part.stl becomes that layer, and the still is drawn again in
-the layer's colour (neobotics draws a lone part in its default blue).
-Needs Pillow and neobotics (it is in the neobotics environment). The rows that point at
+the layer's colour (the CAD tool draws a lone part in its default blue).
+Needs Pillow and the CAD tool (`cad`, from vequir-standard/tools/cad; Pillow comes with it). The rows that point at
 these files (products.image, meshes) live in ui/demo.js.
 """
 import json
@@ -23,7 +23,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 IMAGE_SIZE = 800  # longest side, px
-TRIAD = (200, 220)  # the axis triad neoBotics draws in the bottom-left corner, px
+TRIAD = (200, 220)  # the axis triad the CAD tool draws in the bottom-left corner, px
 
 
 def triangles(stl: Path) -> bytes:
@@ -40,11 +40,11 @@ def part_still(cad: Path, colour: str) -> Image.Image:
     import tempfile
 
     import numpy as np
-    # this script is make/neobotics.py: keep its folder from shadowing the package
+    # this script is make/cad.py: keep its folder from shadowing the package
     here = str(Path(__file__).resolve().parent)
     sys.path[:] = [d for d in sys.path if str(Path(d or ".").resolve()) != here]
-    from neobotics import cadview
-    from neobotics.cadview import _hex_rgb, render_triangles, stl_triangles
+    from cad import cadview
+    from cad.cadview import _hex_rgb, render_triangles, stl_triangles
 
     # no axis triad: it is drawn beside the model, not in a fixed corner
     cadview._axis_triad = lambda *args: None

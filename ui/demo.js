@@ -20,7 +20,7 @@ var DEMO_VERSION = 10;
    readable, and flattened into the `specs` key below. */
 var DEMO_PRODUCTS = [
     /* vequir-unit's PICO2W (products/PICO2W/board): still and mesh by
-       make/neobotics.py, `design` its page. */
+       make/cad.py, `design` its page. */
     { id: 25, category_id: 1, slug: "pico2w", name: "Raspberry Pi Pico 2 W", code: "PICO 2 W", price: 135, stock: 60,
       image: "img/products/pico2w.webp",
       design: "https://anroleroux.co.za/vequir-unit/products/PICO2W/board/index.html",
@@ -64,7 +64,7 @@ var DEMO_PRODUCTS = [
       blurb: "Square, sine, triangle — and anything you can draw.",
       specs: [["Channels", "2"], ["Bandwidth", "10 MHz sine"], ["Sample rate", "125 MS/s"], ["Amplitude", "±10 V"], ["Waveforms", "4 + arbitrary"], ["Interface", "USB‑C, rotary"]] },
     /* From vequir-power's parts library (battery_holders/…), built with
-       neoBotics: the still and the meshes are exported by make/neobotics.py,
+       the CAD tool: the still and the meshes are exported by make/cad.py,
        and `design` links the item's page on vequir-power's catalogue site.
        Meshes are [name, colour] — the file is ui/models/<slug>/<name>.stl. */
     { id: 18, category_id: 2, slug: "holder-18650", name: "18650 Holder, Single", code: "18650 ×1", price: 35, stock: 85,
@@ -88,8 +88,8 @@ var DEMO_PRODUCTS = [
       blurb: "Six 18650 cells in one enclosure. Charge it over USB‑C; charge your phone and anything else from its two USB‑A ports.",
       specs: [["Battery", "6 × 18650 pack, 2S3P, 8.4 V full"], ["Size", "140 × 69 × 53 mm"], ["Charging", "CN3302 2S boost charger, USB‑C in"], ["USB out", "2 × USB‑A fast charge (IP6505)"], ["Cell mounting", "Pack screwed to 4 pillars, 8 × M1.2"], ["Cells", "Not included"]],
       meshes: [["lid", "#66ad73"], ["base", "#5c8fc7"], ["holders", "#38383d"], ["cells", "#e08f3d"], ["clips", "#ccccd1"], ["strips", "#4c5461"], ["screws", "#b3b3b8"], ["chargers", "#26734c"]] },
-    /* From vequir-standard's parts library, built with neoBotics: stills
-       and meshes by make/neobotics.py (one layer each), `design` its page. */
+    /* From vequir-standard's parts library, built with the CAD tool: stills
+       and meshes by make/cad.py (one layer each), `design` its page. */
     { id: 21, category_id: 2, slug: "cell-18650", name: "18650 Li‑ion Cell", code: "18650", price: 79, stock: 140,
       image: "img/products/cell-18650.webp",
       design: "https://anroleroux.co.za/vequir-standard/library/batteries/cell_18650/index.html",
@@ -109,7 +109,7 @@ var DEMO_PRODUCTS = [
       specs: [["Standard", "DIN 963, slotted countersunk"], ["Thread", "M1.2 × 0.25"], ["Length", "6 mm overall"], ["Head", "2.3 mm, 90°"], ["Tap hole", "0.95 mm"], ["Pack", "50 screws"]],
       meshes: [["screw", "#b3b3b8"]] },
     /* Bought in from DIY Electronics; modelled in vequir-power's library
-       (protection_boards/bms_3s_20a): still and mesh by make/neobotics.py. */
+       (protection_boards/bms_3s_20a): still and mesh by make/cad.py. */
     { id: 24, category_id: 2, slug: "bms-3s-20a", name: "3S Li‑ion BMS 20A", code: "3S BMS", price: 89, stock: 30,
       image: "img/products/bms-3s-20a.webp",
       design: "https://anroleroux.co.za/vequir-power/library/protection_boards/bms_3s_20a/index.html",
