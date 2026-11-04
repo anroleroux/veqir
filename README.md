@@ -45,23 +45,24 @@ ui/
   comps/   header  listing  product  viewer  checkout  done  cart  search  toast
   img/     favicon.svg  products/<slug>.webp (part stills)
   models/  <slug>/<layer>.stl (3D parts' meshes)
-make/      tpl.mk (compose macro)  js.map  web.map  neobotics.py
+make/      tpl.mk (compose macro)  js.map  web.map  cad.py
 ```
 
 ## 3D parts from the vequir catalogues
 
-Parts designed with [neoBotics](https://github.com/anroleroux/neoBotics)
+Parts designed with the [CAD tool](https://github.com/anroleroux/vequir-standard/tree/main/tools/cad)
 live in three catalogue repositories, each with its own product page:
 
 | Repository | Holds | Page |
 |---|---|---|
 | [vequir-standard](https://github.com/anroleroux/vequir-standard) | standard parts: the 18650 cell, the Keystone 1107-1 clip, the M1.2 screw | [anroleroux.co.za/vequir-standard](https://anroleroux.co.za/vequir-standard/) |
-| [vequir-power](https://github.com/anroleroux/vequir-power) | the single 18650 holder and the six-cell pack, and their parts | [anroleroux.co.za/vequir-power](https://anroleroux.co.za/vequir-power/) |
-| [vequir-unit](https://github.com/anroleroux/vequir-unit) | the PB6 powerbank | [anroleroux.co.za/vequir-unit](https://anroleroux.co.za/vequir-unit/) |
+| [vequir-power](https://github.com/anroleroux/vequir-power) | the single 18650 holder and the six-cell pack, and their parts; the 3S BMS | [anroleroux.co.za/vequir-power](https://anroleroux.co.za/vequir-power/) |
+| [vequir-unit](https://github.com/anroleroux/vequir-unit) | the PB6 powerbank; the Raspberry Pi Pico 2 W | [anroleroux.co.za/vequir-unit](https://anroleroux.co.za/vequir-unit/) |
 
 The 18650 cell, the Keystone 1107-1 clip and the M1.2 × 6 screws
-(vequir-standard), the single 18650 holder and the six-cell pack
-(vequir-power) and the PB6 powerbank (vequir-unit, `neobotics build PB6`)
+(vequir-standard), the single 18650 holder, the six-cell pack and the 3S
+BMS (vequir-power), and the PB6 powerbank (vequir-unit, `cad build PB6`)
+and the Raspberry Pi Pico 2 W (vequir-unit, `PICO2W/board`)
 carry a
 rendered still for their tile and an interactive model on their page
 (`comps/viewer.js`: drag to turn, scroll to zoom, hide or see through each
@@ -73,21 +74,21 @@ import map) and the meshes. The choice is remembered in this browser
 away until **disable 3D** under the viewer turns it off. If three.js or a
 mesh fails, the still stays in its place.
 
-`make/neobotics.py` brings an assembly or a single part over from a
-neoBotics build. For an assembly it merges the component STLs into one per
+`make/cad.py` brings an assembly or a single part over from a
+CAD tool build (`cad build`). For an assembly it merges the component STLs into one per
 colour (a layer) and turns `part.png` into the still; a single part takes
 one layer, and its still is drawn again in that layer's colour.
 
 ```bash
-# in vequir-power (with neoBotics and vequir-standard cloned beside it):
-#   neobotics build library/battery_holders/pack_3x2
-python make/neobotics.py ../vequir-power/results/library/battery_holders/pack_3x2/_assembly/cad \
+# in vequir-power (with vequir-standard, which carries the CAD tool, cloned beside it):
+#   cad build library/battery_holders/pack_3x2
+python make/cad.py ../vequir-power/results/library/battery_holders/pack_3x2/_assembly/cad \
     pack-18650-6 holders=#38383d cells=#e08f3d clips=#ccccd1 strips=#4c5461 screws=#b3b3b8
 ```
 
 ```bash
-# a single part, in vequir-standard: neobotics build library/batteries/cell_18650
-python make/neobotics.py ../vequir-standard/results/library/batteries/cell_18650/cad cell-18650 cell=#e08f3d
+# a single part, in vequir-standard: cad build library/batteries/cell_18650
+python make/cad.py ../vequir-standard/results/library/batteries/cell_18650/cad cell-18650 cell=#e08f3d
 ```
 
 Then add or update the product, its `meshes` rows and its `design` link
@@ -128,7 +129,7 @@ One localStorage key per model, each a JSON array of rows. Relations are ids.
 | `slug` | text | unique; URL segment, shown as the SKU |
 | `name` | text | |
 | `code` | text | part code drawn on the tile |
-| `price` | number | in dollars |
+| `price` | number | in South African rand (ZAR), shown as `R1,399.00` |
 | `stock` | integer | units on hand; ≤ 5 shows "Only n left", 0 is out of stock |
 | `blurb` | text | one-line description |
 | `image` | text \| null | still for the tile, relative to the base (`img/products/<slug>.webp`); null draws the part code instead |

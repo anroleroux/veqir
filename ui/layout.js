@@ -67,9 +67,15 @@ function meshesOf(productId) {
 
 /* ---- Shared helpers ---- */
 
-var CURRENCY = "$";
+var CURRENCY = "R";  /* South African rand */
 
-function money(amount) { return CURRENCY + Number(amount).toFixed(2); }
+/* R1,399.00: thousands grouped with commas. */
+function money(amount) {
+    return CURRENCY + Number(amount).toFixed(2).replace(/\B(?=(\d{3})+\.)/g, ",");
+}
+
+/* The same without the cents when they are .00 (R2,000), for the price slider. */
+function wholeMoney(amount) { return money(amount).replace(/\.00$/, ""); }
 
 /* Round to whole cents, so sums of prices store as 9.3, not 9.2999…. */
 function cents(amount) { return Math.round(amount * 100) / 100; }
@@ -103,9 +109,9 @@ function specLine(p) {
     return specsOf(p.id).slice(0, 2).map(function (s) { return s.value; }).join(" · ");
 }
 
-/* The price slider's top stop: $100, or higher if the range grows. */
+/* The price slider's top stop: R2,000, or higher if the range grows. */
 function priceCap() {
-    return products().reduce(function (max, p) { return Math.max(max, Math.ceil(p.price)); }, 100);
+    return products().reduce(function (max, p) { return Math.max(max, Math.ceil(p.price)); }, 2000);
 }
 
 /* What a shipping method costs on a given subtotal. */

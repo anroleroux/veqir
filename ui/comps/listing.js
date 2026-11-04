@@ -62,14 +62,14 @@ function listingTemplate(state) {
     var slider = '<label class="price-filter">' +
             '<span>PRICE ≤</span>' +
             '<input type="range" min="2" max="' + cap + '" step="1" value="' + state.maxPrice + '" ' +
-                'oninput="this.nextElementSibling.textContent = money(this.value).replace(/\\.00$/, \'\')" ' +
+                'oninput="this.nextElementSibling.textContent = wholeMoney(this.value)" ' +
                 'onchange="listing.maxPrice = Number(this.value)" aria-label="Maximum price">' +
-            '<span class="price-filter__value">' + CURRENCY + state.maxPrice + '</span>' +
+            '<span class="price-filter__value">' + wholeMoney(state.maxPrice) + '</span>' +
         '</label>';
 
     var empty = list.length ? "" :
         '<div class="empty">' +
-            '<p>Nothing under ' + CURRENCY + state.maxPrice + '.</p>' +
+            '<p>Nothing under ' + wholeMoney(state.maxPrice) + '.</p>' +
             '<button class="btn btn--small" type="button" onclick="listing.maxPrice = priceCap()">Reset price</button>' +
         '</div>';
 
