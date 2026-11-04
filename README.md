@@ -50,7 +50,7 @@ make/      tpl.mk (compose macro)  js.map  web.map  neobotics.py
 
 ## 3D parts from the vequir catalogues
 
-Parts designed with [neoBotics](https://github.com/anroleroux/neoBotics)
+Parts designed with [neoBotics](https://github.com/anroleroux/vequir-standard/tree/main/neobotics)
 live in three catalogue repositories, each with its own product page:
 
 | Repository | Holds | Page |
@@ -80,7 +80,7 @@ colour (a layer) and turns `part.png` into the still; a single part takes
 one layer, and its still is drawn again in that layer's colour.
 
 ```bash
-# in vequir-power (with neoBotics and vequir-standard cloned beside it):
+# in vequir-power (with vequir-standard, which carries neoBotics, cloned beside it):
 #   neobotics build library/battery_holders/pack_3x2
 python make/neobotics.py ../vequir-power/results/library/battery_holders/pack_3x2/_assembly/cad \
     pack-18650-6 holders=#38383d cells=#e08f3d clips=#ccccd1 strips=#4c5461 screws=#b3b3b8
