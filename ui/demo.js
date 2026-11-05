@@ -13,17 +13,17 @@
    models documented in the README.
    ============================================================ */
 
-var DEMO_VERSION = 10;
+var DEMO_VERSION = 11;
 
 /* Specs are their own model (one row per label/value, ordered by
    `position`); they are written inline here only to keep the seed
    readable, and flattened into the `specs` key below. */
 var DEMO_PRODUCTS = [
-    /* vequir-unit's PICO2W (products/PICO2W/board): still and mesh by
+    /* vequir-standard's electronics/pico_2w (bought in): still and mesh by
        make/cad.py, `design` its page. */
     { id: 25, category_id: 1, slug: "pico2w", name: "Raspberry Pi Pico 2 W", code: "PICO 2 W", price: 135, stock: 60,
       image: "img/products/pico2w.webp",
-      design: "https://anroleroux.co.za/vequir-unit/products/PICO2W/board/index.html",
+      design: "https://anroleroux.co.za/vequir-standard/library/electronics/pico_2w/index.html",
       blurb: "RP2350 with Wi‑Fi and Bluetooth. Castellated, so it solders flat or takes headers.",
       specs: [["Core", "Dual Cortex‑M33 or Hazard3 RISC‑V, 150 MHz"], ["Flash / SRAM", "4 MB / 520 KB"], ["Wireless", "Wi‑Fi 4 (2.4 GHz), Bluetooth 5.2"], ["GPIO", "26"], ["Logic level", "3.3 V"], ["USB / size", "Micro‑USB, 51 × 21 mm"]],
       meshes: [["board", "#1f7a4d"]] },
@@ -92,27 +92,27 @@ var DEMO_PRODUCTS = [
        and meshes by make/cad.py (one layer each), `design` its page. */
     { id: 21, category_id: 2, slug: "cell-18650", name: "18650 Li‑ion Cell", code: "18650", price: 79, stock: 140,
       image: "img/products/cell-18650.webp",
-      design: "https://anroleroux.co.za/vequir-standard/library/batteries/cell_18650/index.html",
+      design: "https://anroleroux.co.za/vequir-standard/library/power/cell_18650/index.html",
       blurb: "The cell every VequIR holder and pack is sized for. Button top, flat negative.",
       specs: [["Size", "18.4 × 65 mm, button included"], ["Chemistry", "Li‑ion"], ["Nominal", "3.6 V, 4.2 V full"], ["Capacity", "3000 mAh"], ["Positive", "7 mm button, 1 mm proud"], ["Fits", "18650 Holder, Six-Pack, PB6"]],
       meshes: [["cell", "#e08f3d"]] },
     { id: 22, category_id: 2, slug: "clip-1107", name: "Keystone 1107‑1 Battery Clip", code: "1107‑1", price: 6.5, stock: 600,
       image: "img/products/clip-1107.webp",
-      design: "https://anroleroux.co.za/vequir-standard/library/terminals/keystone_1107_1/index.html",
+      design: "https://anroleroux.co.za/vequir-standard/library/power/keystone_1107_1/index.html",
       blurb: "Spring clip with a solder lug. Hooks over a 1 mm wall — two per 18650 holder.",
       specs: [["Size", "6.35 × 13.7 mm, 4.0 mm deep"], ["Material", "Tin‑nickel plated spring steel"], ["Cells", "AA, A, 17500, 18350, 18650, C, D"], ["Terminal", "Solder lug, 1.8 mm hole"], ["Wall", "Hooks over 1 mm"], ["Fits", "18650 Holder (2 per holder)"]],
       meshes: [["clip", "#ccccd1"]] },
     { id: 23, category_id: 5, slug: "screw-m1-2x6", name: "M1.2 × 6 Countersunk Screws, 50", code: "M1.2 × 6", price: 49, stock: 75,
       image: "img/products/screw-m1-2x6.webp",
-      design: "https://anroleroux.co.za/vequir-standard/library/fasteners/m1_2x6_countersunk/index.html",
+      design: "https://anroleroux.co.za/vequir-standard/library/hardware/m1_2x6_countersunk/index.html",
       blurb: "Slotted flat‑head screws that join 18650 holders into packs and fix packs down.",
       specs: [["Standard", "DIN 963, slotted countersunk"], ["Thread", "M1.2 × 0.25"], ["Length", "6 mm overall"], ["Head", "2.3 mm, 90°"], ["Tap hole", "0.95 mm"], ["Pack", "50 screws"]],
       meshes: [["screw", "#b3b3b8"]] },
-    /* Bought in from DIY Electronics; modelled in vequir-power's library
-       (protection_boards/bms_3s_20a): still and mesh by make/cad.py. */
+    /* Bought in from DIY Electronics; modelled in vequir-standard's library
+       (power/bms_3s_20a): still and mesh by make/cad.py. */
     { id: 24, category_id: 2, slug: "bms-3s-20a", name: "3S Li‑ion BMS 20A", code: "3S BMS", price: 89, stock: 30,
       image: "img/products/bms-3s-20a.webp",
-      design: "https://anroleroux.co.za/vequir-power/library/protection_boards/bms_3s_20a/index.html",
+      design: "https://anroleroux.co.za/vequir-standard/library/power/bms_3s_20a/index.html",
       blurb: "Protection board for a three-cell 18650 or 26650 pack. Charge at 12.6 V, draw up to 20 A.",
       specs: [["Cells", "3S, 3.6 – 3.7 V nominal"], ["Output", "20 A, 252 W max"], ["Charge voltage", "12.6 V"], ["Charge max", "12.75 V — do not exceed"], ["Fits", "18650 / 26650 Li‑ion, LiPo"], ["Size", "64 × 20 × 3.4 mm"]],
       meshes: [["board", "#2a5d9f"]] }
