@@ -55,15 +55,14 @@ live in three catalogue repositories, each with its own product page:
 
 | Repository | Holds | Page |
 |---|---|---|
-| [vequir-standard](https://github.com/anroleroux/vequir-standard) | standard parts: the 18650 cell, the Keystone 1107-1 clip, the M1.2 screw | [anroleroux.co.za/vequir-standard](https://anroleroux.co.za/vequir-standard/) |
-| [vequir-power](https://github.com/anroleroux/vequir-power) | the single 18650 holder and the six-cell pack, and their parts; the 3S BMS | [anroleroux.co.za/vequir-power](https://anroleroux.co.za/vequir-power/) |
-| [vequir-unit](https://github.com/anroleroux/vequir-unit) | the PB6 powerbank; the Raspberry Pi Pico 2 W | [anroleroux.co.za/vequir-unit](https://anroleroux.co.za/vequir-unit/) |
+| [vequir-standard](https://github.com/anroleroux/vequir-standard) | everything bought in, by category: power (the 18650 cell, the Keystone 1107-1 clip, the 3S BMS, the charger boards), hardware (the M1.2 screws), electronics (the Raspberry Pi Pico 2 W) | [anroleroux.co.za/vequir-standard](https://anroleroux.co.za/vequir-standard/) |
+| [vequir-power](https://github.com/anroleroux/vequir-power) | the single 18650 holder and the six-cell pack, and their brackets (end strip, clamping beam, BMS clamp) | [anroleroux.co.za/vequir-power](https://anroleroux.co.za/vequir-power/) |
+| [vequir-unit](https://github.com/anroleroux/vequir-unit) | the PB6 powerbank: its enclosure and its one assembly | [anroleroux.co.za/vequir-unit](https://anroleroux.co.za/vequir-unit/) |
 
-The 18650 cell, the Keystone 1107-1 clip and the M1.2 × 6 screws
-(vequir-standard), the single 18650 holder, the six-cell pack and the 3S
-BMS (vequir-power), and the PB6 powerbank (vequir-unit, `cad build PB6`)
-and the Raspberry Pi Pico 2 W (vequir-unit, `PICO2W/board`)
-carry a
+The 18650 cell, the Keystone 1107-1 clip, the M1.2 × 6 screws, the 3S BMS
+and the Raspberry Pi Pico 2 W (vequir-standard), the single 18650 holder
+and the six-cell pack (vequir-power), and the PB6 powerbank (vequir-unit,
+`cad build PB6`) carry a
 rendered still for their tile and an interactive model on their page
 (`comps/viewer.js`: drag to turn, scroll to zoom, hide or see through each
 layer). The page opens on the still with an **Enable 3D** button, so
@@ -87,8 +86,8 @@ python make/cad.py ../vequir-power/results/library/battery_holders/pack_3x2/_ass
 ```
 
 ```bash
-# a single part, in vequir-standard: cad build library/batteries/cell_18650
-python make/cad.py ../vequir-standard/results/library/batteries/cell_18650/cad cell-18650 cell=#e08f3d
+# a single part, in vequir-standard: cad build library/power/cell_18650
+python make/cad.py ../vequir-standard/results/library/power/cell_18650/cad cell-18650 cell=#e08f3d
 ```
 
 Then add or update the product, its `meshes` rows and its `design` link
